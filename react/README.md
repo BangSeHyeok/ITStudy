@@ -1,3 +1,5 @@
+#npx create-react-app ./
+
 #npmjs.com/package
 npm install react-beautiful-dnd --save : 드래그인드랍 모듈
 <DragDropContext>
@@ -66,3 +68,16 @@ localStorage.setItem(key,value);
 localStorage.setItem(key,JSON.stringify([]);
 localStorage.getItem(key)
 JSON.parse(localStorage.getItem(key))
+
+#API사용하는 법
+#themoviedb.org
+
+#Axios란
+HTTP비동기 통신 라이브러리, 백엔드랑 프론트엔드랑 통신을 쉽게하기 위해 Ajax와 더불어 사용합니다.
+
+#인스터스화
+
+#useEffect
+
+#styled Components란
+CSS-in-JS라고 하는 javascript에서 CSS를 처리해주는 라이브러리
