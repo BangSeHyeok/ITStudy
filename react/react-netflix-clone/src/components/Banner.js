@@ -107,7 +107,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 150vh;
+  height: 100vh;
 `;
 
 const HomeContainer = styled.div`
