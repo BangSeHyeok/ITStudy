@@ -5,6 +5,7 @@ import { Footer } from './components/Footer';
 import { Nav } from './components/Nav';
 import { Row } from './components/Row';
 import {Routes,Route} from 'react-router-dom';
+import {MainPage,DetailPage,SearchPage} from './pages/**';
 
 const Layout = () =>{
   return(
@@ -22,8 +23,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<MainPage />}/>
-          <Route index element={<MainPage />}/>
-          <Route index element={<MainPage />}/>
+          <Route path=':movieId' element={<DetailPage />}/>
+          <Route path='search' element={<SearchPage />}/>
         </Route>
       </Routes>
       {/* <Nav/>
