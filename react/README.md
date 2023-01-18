@@ -160,3 +160,53 @@ describe(여러 관련 테스트를 그룹화하는 블록)
 
 #firing Events
 코드가 적을 경우 사용하지만 use Event가 더 좋다
+
+#App 배포
+Github Action를 이용한 배포
+1.레포지토리 작성
+2.App을 레포지토리에 연결
+3.workflow생성(Actions->Node.js->run:npm CI-> run:npm i)
+4.AWS로그인
+5.S3(쿨라우드의 확장 가능한 스토레이지)클릭
+6.버킷 만들기(버킷이름 작성 -> 버킷만들기)
+7.속성탭 -> 정적 웹 사이트 호스팅 -> 편집 -> 활성화 -> 인덱스 문서(index.html) ->변경 사항 저장
+8.버킷 정책 변경(권한탭 -> 퍼블릭 액세스 차단 -> 편집 -> 버튼해제 -> 변경 사항 저장)
+9.버킷 정책 작성
+{
+    "Version":"2012-10-17",
+    "Statement":[
+        {
+            "Sid":"PublicReadGetObject",
+            "Effect":"Allow",
+            "Principal":"*",
+            "Action":[
+                "s3:GetObject"
+            ],
+            "Resource":[
+                "arn:aws:s3:::Bucket-Name/*"
+            ]
+        }
+    ]
+}
+10.yml파일작성(Actions->Node.js)
+    - uses: awact/s3-action@master
+      with:
+        args: --acl public-read --follow-symlinks --delete
+      env:
+        SOURCE_DIR: './build'
+        AWS_REGION: 'ap-northeast-2'
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+10-1.AWS->IAM->사용자->사용자추가->사용자이름(~~),엑세스키체크->다음->권한(S3FullAccess)->다음->사용자만들기 ->AWS_ACCESS_KEY_ID ->AWS_SECRET_ACCESS_KEY
+
+https://github.com/awact/s3-action
+
+11.깃허브->셋팅->Secrets->Actions->
+AWS_S3_BUCKET:S3네임
+AWS_ACCESS_KEY_ID:AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY:AWS_SECRET_ACCESS_KEY
+
+12.깃허브 -> Actions -> re-run jobs
+
+#IAM이란?
