@@ -210,3 +210,130 @@ AWS_SECRET_ACCESS_KEY:AWS_SECRET_ACCESS_KEY
 12.깃허브 -> Actions -> re-run jobs
 
 #IAM이란?
+
+#Next JS란
+리액트의 SSR을 쉽게 구현할 수 있게 도와주는 간단한 프레임워크
+SPA을 이용하여 CSR을 하기 때문에 좋은점도 있지만 단점도 있다.
+그 부분이 바로 검색엔진 최적화(SEO)부분이 단점
+
+#CSR?
+
+#SSR?
+
+######################################
+
+#Next.js설치
+npx create-next-app@latest
+npx create-next-app@latest --typescript ./
+
+#Next.js 아키텍처
+-pages(이 폴더 안에 페이지들을 생성)
+    --api
+        --hello.ts
+    --_app.tsx(공통되는 레이아웃을 작성)
+    --index.tsx(/페이지)
+    --about.tsx
+--public
+    --img(이미지같은 정적에셋들을 보관)
+--styles
+    --globals.css
+    --Home.module.css(확장자 앞에 module을 붙여야 한다)
+--next.config.js(Nextjs는웹팩을 기본 번들러로 사용)
+--package.json(버전)
+
+#Pre-rendering
+NextJs는 모든 페이지를 pre-render합니다. 이 pre-render한다는 의미는 모든 페이지를 위한 HTML을 Client사이드에서 자바스크립트로 처리하기 전, 사전에 생성하는것 , 이렇게 하기 때문에 SEO검색엔진 최적화가 좋아집니다.
+
+#Data Fetching
+리액트에서는 데이터를 가져올 때 useEffect안에서 가져오지만 Nextjs는 아래의 방법을 이용
+ -getStaticProps : static Generation으로 빌드할 때 데이터를 불러옴
+ export async function getStaticProps(ccontext){
+    const res = await fetch('https://');
+    const posts = await res.json();
+    return{
+        props:{posts}
+    }
+ }
+    
+ -getStaticPaths : static Generation으로 데이터에 기반하여 pre-render시 특정한 동적 라우팅 구현 (pages/post/[id].js)
+ export async function getStaticPaths(){
+    const res = await fetch('https://');
+    const posts = await res.json();
+
+    return{
+        props:[{params: {id : '1'}}],
+        fallback:...
+    }
+ }
+
+ -getServerSideProps : Server Side Rendering으로 요청이 있을 때 데이터를 불러옵니다.
+
+ export async function getServerSideProps(){
+    const res = await fetch('https://');
+    const posts = await res.json();
+    return{
+        props:{}
+    }
+ }
+
+ #TypeScript란
+ 자바스크립트에 타입을 부여한 언어, 자바스크립트의 확장된 언어라고 볼수있다. 브라우저에서 실행하려면 파일을 한번 변환 해주어야 합니다. 그 과정을 컴파일 이라고 부릅니다.
+
+ #Type System이란
+ -개발 환경에서 에러를 잡는 걸 도와줌
+ -type annotations를 사용해서 코드를 분석할 수 있습니다.
+ -오직 개발 환경에서만 활성화
+ -타입 스크립트와 성능 향상과는 관계가 없습니다.
+
+ #TypeScript사용이유
+
+ #markdown.md파일이란?
+ **Markdown**은 텍스트 기반의 마크업언어로 쉽게 쓰고 읽을 수 있으며 HTML로 변환이 가능합니다.
+
+ #TypeScript타입이란?
+ 타입이란, 그 vaule가 가지고 있는 프로퍼티나 함수를 추론할 수 있는 방법
+ Primitive Types
+    --string
+    --number
+    --boolean
+    --null
+    --nudefined
+    --symbol : 고유한 상수 값을 나타냅니다.
+    --null
+
+Object Types
+    --function
+    --array
+    --classes
+    --object
+
+plus Types
+    --Tuple
+    --Enum
+    --Any
+    --Void
+    --Union : 두개 이상의 데이터 타입을 지정가능
+    --Never:절대 발생하지 않을 값(함수의 리턴타입으로 사용)
+
+#TypeScript 선언 방법
+let music:string = "123";
+const num: number = 0;
+let something:any[] = []
+let empId: string | number
+var employee : [number,string] = [1123,'sadf'] //Tuple
+
+#Type annotaion, Type inference
+let music:string = "123"; Type annotaion
+let music = "123"; Type inference
+
+#Type assetion이란
+타입 변경을 해주는것
+
+interface Foo{
+    bar: number;
+    bas: string;
+}
+
+var foo = {} as Foo;
+foo.bar = 123;
+foo.bas = "hello"
