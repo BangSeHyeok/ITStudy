@@ -337,3 +337,19 @@ interface Foo{
 var foo = {} as Foo;
 foo.bar = 123;
 foo.bas = "hello"
+
+#Nextjs13
+npx create-next-app@latest --ts ./
+
+#pocketbase이란(pocketbase.io)
+open source backend consisting of embedded database(SQLite)
+./pocketbase serve
+
+pages폴더 삭제후 app폴더 생성
+
+index.js가 page.js로 됨
+
+next.config.js에experimental:{appDir:true}추가
+
+Server Component
+Client Component

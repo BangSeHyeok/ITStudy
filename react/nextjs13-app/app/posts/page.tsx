@@ -1,5 +1,8 @@
+import Link from "next/link";
+import { CreatePost } from "./[id]/CreatePost";
+
 async function getPost(){
-    const res = await fetch('http://127.0.0.1:8090/api/collections/posts/recoreds');
+    const res = await fetch('http://127.0.0.1:8090/api/collections/posts/records',{cache:'no-store'});
     const data = await res.json();
     return data?.items as any[];
 }
@@ -13,11 +16,12 @@ export const PostsPage = async () => {
             {posts?.map((posts)=>{
                 return <PostItem key={posts.id} post={posts}/>
             })}
+            <CreatePost/>
     </div>
   )
 }
 
-const PostItem = ({post}) => {
+const PostItem = ({post} : any) => {
     const { id,title,created} = post || {};
     return (
         <Link href={`/posts/${id}`}>
