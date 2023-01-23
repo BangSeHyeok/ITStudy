@@ -1,4 +1,5 @@
 #npx create-react-app ./
+npm install -g create-react-app
 
 #npmjs.com/package
 npm install react-beautiful-dnd --save : 드래그인드랍 모듈
@@ -353,3 +354,70 @@ next.config.js에experimental:{appDir:true}추가
 
 Server Component
 Client Component
+
+
+#react version 18
+ -Automatic batching
+    함수 안에서 setState를 많이 호출시키더라도 리렌더링은 단 한번만 발생합니다. 이전 버전에서는 api,콜백함수,timeouts함수에는 적용하지 않았는데, 18버전부터는 적용
+    Automatic batching을 사용하지 않는방법은 flushSync(()=>{//setState})
+
+ -Suspense on the server
+    스텝 순서 
+        -서버에서 전체 앱에 대한 데이터를 가져옴
+        -서버에서 전체 앱을 HTML로 렌더링하고 응답으로 보냄
+        -클라이언트에서 전체 앱에 대한 js코드를 로드
+        -js논리를 전체 앱에 대해 서버 생성 HTML에 연결(hydration)
+    문제점
+        hydration을 하기 전에 모든것이 로드되어야한다.
+    
+    해결방안
+    Suspense을 사용하여 앱을 더 작은 독립 단위로 나눌수있다.
+    <Suspense></Suspense>
+
+-Transition
+    특정 업데이트를Transition으로 표시하여 사용자 상호 작용을 크게 개선할수 있다.
+    setInputValue(input);
+    startTransition(()=>{
+        setSearchQuery(input);
+    })
+    useState = useTransition();
+    {isPending && <Spinner/>}
+
+#리덕스란?
+자바스크립트 애플리케이션을 위한 상태 관리 라이브러리
+리덕스에 store가 있어서 store에 state를 관리한다.
+
+#Redux Data Flow
+
+#Reducer
+
+#Redux Store
+
+#미들웨어(실무에선사용) 없이 리덕스 카운터 앱 만들기
+    -리액트 앱 설치(npx create-react-app ./ --template typescript)
+    -리덕스 라이브러리 설치(npm install redux --save)
+
+#combineReducers
+
+#Provider란
+npm install react-redux --save
+    -useSelector
+    -useDispath
+
+#리덕스 미들웨어란?
+액션을 디스패치전달하고 리듀서에 도달하는 사이에 사전에 지정된 작업을 실행할 수 있게 해주는 중간자,
+로깅,충돌보고,비동기 API와통신,라우팅 등을 미들웨어처리
+
+#Redux Thunk
+    리덕스를 사용하는 앱에서 비동기 작업을 할 때 많이 사용하는 방법
+
+#Thunk
+일부 지연된 작업을 수행하는 코드 조각
+
+npm install axios --save
+npm install redux-thunk --save
+
+#리덕스 툴킷
+     Redux로직을 작성하기 위한 공식 권장 접근 방식. 
+     npx create-react-app ./ --template redux-typescript
+     npm install @reduxjs/toolkit react-redux
