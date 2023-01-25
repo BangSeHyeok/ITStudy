@@ -80,3 +80,11 @@ build 명령어는 해당 디렉토리 내에서 dockerfile이라는 파일을 �
 #리액트를 위한 도커 파일 작성
 개발 환경의 도커 파일
 운영 환경의 도커 파일
+
+#포트 맵핑
+docker run -p 3000:3000 ID
+
+#EC2
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+1. 도커 설치
+2.
