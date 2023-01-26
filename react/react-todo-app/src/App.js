@@ -1,7 +1,8 @@
-import React,{useState, useCallback} from 'react';
+import React,{useState, useCallback, useEffect} from 'react';
 import './App.css';
 import Form from './components/Form';
 import List from "./components/List"
+import axios from 'axios';
 
 const initialTodoData = localStorage.getItem("todoData")?
 JSON.parse(localStorage.getItem("todoData")) : [];
@@ -10,6 +11,14 @@ export default function App() {
 
   const [todoData,setTodoData] = useState(initialTodoData);
   const [value,setValue] = useState("");
+
+  useEffect(() => {
+    const apiCall = async () => {
+      const response = await axios.get(`http://127.0.0.1:8000/api/employee`);
+      console.log(response.data);
+    };
+    apiCall();
+  }, [])
 
   const handleClick = useCallback((id) =>{
     let newTodoData = todoData.filter(data => data.id !== id);

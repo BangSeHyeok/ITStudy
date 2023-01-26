@@ -1,4 +1,4 @@
-"""DjangoAPI URL Configuration
+"""rest_api_test URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-from django.conf.urls import include
+from rest_framework.authtoken import views
+from student.api import StudentList,StudentDetail
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
-    # path(r'^', include('EmployeeApp.urls')),
-    path('api/', include('EmployeeApp.urls')),
+    path('admin/', admin.site.urls),
+    path('api/student_list', StudentList.as_view(), name = 'student_list'),
+    path('api/student_list/<int:student_id>', StudentDetail.as_view(), name = 'student_Detail'),
+    path('api/auth',views.obtain_auth_token, name = 'obtain_auth_token'),
+
 ]
